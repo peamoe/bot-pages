@@ -37,7 +37,7 @@ the dependencies we will be using:
 
 ```python
 from deltabot_cli import BotCli
-from deltachat2 import MsgData, events
+from deltachat2 import MessageData, events
 ```
 
 ## Setting up the bot CLI
@@ -60,7 +60,7 @@ With the `cli` object we can now register event handlers:
 @cli.on(events.NewMessage)
 def echo(bot, accid, event):
     msg = event.msg
-    reply = MsgData(text=msg.text)
+    reply = MessageData(text=msg.text)
     bot.rpc.send_msg(accid, msg.chat_id, reply)
 ```
 
@@ -83,7 +83,7 @@ receives these parameters:
   so we access the incoming message object directly
   via `event.msg`.
 
-With `reply = MsgData(text=msg.text)` we create a reply object
+With `reply = MessageData(text=msg.text)` we create a reply object
 with the same text as the incoming message.
 
 We use `bot.rpc.send_msg(accid, msg.chat_id, reply)` to send the
@@ -111,14 +111,14 @@ complete source code of our `echobot.py` script:
 
 ```python
 from deltabot_cli import BotCli
-from deltachat2 import MsgData, events
+from deltachat2 import MessageData, events
 
 cli = BotCli("echobot")
 
 @cli.on(events.NewMessage)
 def echo(bot, accid, event):
     msg = event.msg
-    reply = MsgData(text=msg.text)
+    reply = MessageData(text=msg.text)
     bot.rpc.send_msg(accid, msg.chat_id, reply)
 
 if __name__ == "__main__":
